@@ -16,7 +16,7 @@ export default function Home() {
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState("");
 
-  const API_URL = "http://127.0.0.1:8000"; // change after deploy
+  const API_URL = "https://cleanflow-ai-5r6a.onrender.com"; 
 
   const handleChoose = () => {
     inputRef.current?.click();
