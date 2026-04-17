@@ -22,7 +22,7 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],  # Note: Change this to your Vercel URL before final launch!
+    allow_origins=['https://clean-flow-ai.vercel.app/'],
     allow_methods=['*'],
     allow_headers=['*'],
 )
