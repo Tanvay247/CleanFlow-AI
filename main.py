@@ -11,12 +11,6 @@ import os
 import time
 from io import BytesIO
 
-# Initialize Rate Limiter (Anti-Spam Shield)
-limiter = Limiter(key_func=get_remote_address)
-
-# Attach Rate Limiter to the app
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -32,6 +26,13 @@ app.add_middleware(
 )
 
 app = FastAPI()
+
+# Initialize Rate Limiter (Anti-Spam Shield)
+limiter = Limiter(key_func=get_remote_address)
+
+# Attach Rate Limiter to the app
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 TEMP_DIR = 'temp_files'
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB limit
