@@ -14,6 +14,15 @@ from io import BytesIO
 
 from fastapi.middleware.cors import CORSMiddleware
 
+app = FastAPI()
+
+# Initialize Rate Limiter (Anti-Spam Shield)
+limiter = Limiter(key_func=get_remote_address)
+
+# Attach Rate Limiter to the app
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -24,15 +33,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-app = FastAPI()
-
-# Initialize Rate Limiter (Anti-Spam Shield)
-limiter = Limiter(key_func=get_remote_address)
-
-# Attach Rate Limiter to the app
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 TEMP_DIR = 'temp_files'
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB limit
