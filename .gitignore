@@ -1,17 +1,7 @@
-# Next.js
+__pycache__/
+temp_files/
 node_modules/
 .next/
-out/
-
-# Python
-__pycache__/
 *.pyc
-venv/
-.venv/
-.env
-
-# Temp files
-temp_files/
-
-# macOS
 .DS_Store
+.env
