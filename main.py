@@ -148,7 +148,11 @@ from groq import Groq
 # ==================================================
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY", "").strip()
-client = Groq(api_key=groq_api_key) if groq_api_key else None
+try:
+    client = Groq(api_key=groq_api_key) if groq_api_key else None
+except Exception as e:
+    print("Groq init error:", e)
+    client = None
 
 # ==================================================
 # App Init
