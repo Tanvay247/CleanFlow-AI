@@ -6,7 +6,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section id="how" className="w-full max-w-6xl mx-auto px-6 py-12">
+    <section id="how" className="w-full max-w-6xl mx-auto px-6">
       <h2 className="text-4xl font-bold text-center text-white mb-4">
         How It Works
       </h2>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // ✅ Add this
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -14,6 +15,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname(); // ✅ Get current path
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
@@ -23,6 +25,15 @@ export default function Navbar() {
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
+      setMenuOpen(false);
+    }
+  };
+
+  // ✅ Custom handler for Home link
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
       setMenuOpen(false);
     }
   };
@@ -48,17 +59,35 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-2">
-              {navLinks.map((item) =>
-                item.href.startsWith("/") && !item.href.startsWith("/#") ? (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="px-4 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ) : (
+              {navLinks.map((item) => {
+                // ✅ Special handling for Home
+                if (item.name === "Home") {
+                  return (
+                    <Link
+                      key={item.name}
+                      href="/"
+                      onClick={handleHomeClick}
+                      className="px-4 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                }
+                // Other internal pages (non-hash)
+                if (item.href.startsWith("/") && !item.href.startsWith("/#")) {
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="px-4 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                }
+                // Hash links (smooth scroll)
+                return (
                   <a
                     key={item.name}
                     href={item.href}
@@ -67,8 +96,8 @@ export default function Navbar() {
                   >
                     {item.name}
                   </a>
-                )
-              )}
+                );
+              })}
             </div>
 
             {/* Desktop Actions */}
@@ -100,17 +129,33 @@ export default function Navbar() {
           {/* Mobile Menu */}
           {menuOpen && (
             <div className="md:hidden mt-4 border-t border-white/10 pt-4 space-y-2">
-              {navLinks.map((item) =>
-                item.href.startsWith("/") && !item.href.startsWith("/#") ? (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="block px-4 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10 transition"
-                  >
-                    {item.name}
-                  </Link>
-                ) : (
+              {navLinks.map((item) => {
+                // ✅ Special handling for Home in mobile
+                if (item.name === "Home") {
+                  return (
+                    <Link
+                      key={item.name}
+                      href="/"
+                      onClick={handleHomeClick}
+                      className="block px-4 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10 transition"
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                }
+                if (item.href.startsWith("/") && !item.href.startsWith("/#")) {
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="block px-4 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10 transition"
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                }
+                return (
                   <a
                     key={item.name}
                     href={item.href}
@@ -119,8 +164,8 @@ export default function Navbar() {
                   >
                     {item.name}
                   </a>
-                )
-              )}
+                );
+              })}
               <div className="pt-2 flex flex-col gap-2">
                 <Link
                   href="/contact"
