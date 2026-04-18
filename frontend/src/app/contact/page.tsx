@@ -19,10 +19,10 @@ export default function ContactPage() {
                 Email
               </p>
               <a
-                href="mailto:your-email@example.com"
+                href="mailto:cleanflow247ai@gmail.com"
                 className="text-xl text-green-400 hover:underline"
               >
-                your-email@example.com
+                cleanflow247ai@gmail.com
               </a>
             </div>
 
@@ -31,12 +31,12 @@ export default function ContactPage() {
                 Twitter / X
               </p>
               <a
-                href="https://x.com/yourhandle"
+                href="https://x.com/CleanflowAI247"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xl text-green-400 hover:underline"
               >
-                @yourhandle
+                @CleanflowAI247
               </a>
             </div>
 
@@ -45,18 +45,19 @@ export default function ContactPage() {
                 GitHub
               </p>
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/Tanvay247"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xl text-green-400 hover:underline"
               >
-                /yourusername
+                /Tanvay247
               </a>
             </div>
           </div>
 
           <p className="mt-8 text-sm text-slate-400">
-            We typically respond within 24–48 hours.
+            Currently under development. For any inquiries, please reach out via email.
+            Typically responds within 24-48 hours.
           </p>
         </div>
       </div>
