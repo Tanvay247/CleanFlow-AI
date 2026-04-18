@@ -50,14 +50,14 @@ export default function ContactPage() {
                 rel="noopener noreferrer"
                 className="text-xl text-green-400 hover:underline"
               >
-                /Tanvay247
+                Tanvay247
               </a>
             </div>
           </div>
 
           <p className="mt-8 text-sm text-slate-400">
-            Currently under development. For any inquiries, please reach out via email.
-            Typically responds within 24-48 hours.
+            <p>Currently under development. For any inquiries, please reach out via email.</p>
+            <p>Typically responds within 24-48 hours.</p>
           </p>
         </div>
       </div>
