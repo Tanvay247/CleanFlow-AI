@@ -16,7 +16,8 @@ export default function Home() {
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState("");
 
-  const API_URL = "https://cleanflow-ai-5r6a.onrender.com"; 
+  // const API_URL = "https://cleanflow-ai-5r6a.onrender.com"; 
+  const API_URL = "http://127.0.0.1:8000";
 
   const handleChoose = () => {
     inputRef.current?.click();
@@ -165,7 +166,7 @@ export default function Home() {
 
                   {/* Header */}
                   <div className="mb-6 flex items-center justify-center">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-xl bg-green-500 text-white flex items-center justify-center text-lg shadow-lg">
                         ✓
                       </div>
@@ -220,6 +221,22 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
+
+                  {/* AI Report */}
+                  {result?.ai_report?.trim() && (
+                    <div className="mt-6 rounded-2xl bg-white/5 border border-white/10 p-5 text-left shadow-inner">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-green-400 text-lg">✨</span>
+                        <h4 className="text-sm uppercase tracking-wide font-semibold text-green-400">
+                          AI Cleaning Insights
+                        </h4>
+                      </div>
+
+                      <p className="text-sm text-slate-200 leading-relaxed whitespace-pre-line">
+                        {result.ai_report}
+                      </p>
+                    </div>
+                  )}
 
                   {/* CTA */}
                   <div className="mt-6 flex justify-center">

@@ -4,3 +4,5 @@ pandas
 python-multipart
 slowapi
 openpyxl
+python-dotenv
+google-generativeai
